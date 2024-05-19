@@ -1,0 +1,488 @@
+{
+	"info": {
+		"_postman_id": "ac9f0961-c368-4685-9f1c-816d401d2ca4",
+		"name": "Tech challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15832888"
+	},
+	"item": [
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Listar produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"produtos"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "LANCHE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar produto por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/produtos/:produtoId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"produtos",
+								":produtoId"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "LANCHE",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar produto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nome\": \"Batata show\",\r\n    \"categoria\": \"ACOMPANHAMENTO\",\r\n    \"valor\": 5.00,\r\n    \"descricao\": \"Batata frita\",\r\n    \"imagens\": [\r\n        {\r\n            \"path\": \"imagem 1\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Batata\",\r\n    \"categoria\": 2,\r\n    \"valor\": 5.00,\r\n    \"descricao\": \"Batata frita\",\r\n    \"imagens\": [\r\n        \"imagem 1\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar produto por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/produtos/:produtoId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"produtos",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Checkout pedido - Cliente não informado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataPedido\": \"31/10/2023\",\r\n    \"statusPedido\": 1,\r\n    \"produtos\": [\r\n        {\r\n            \"produto\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Batata\",\r\n                \"categoria\": \"ACOMPANHAMENTO\",\r\n                \"valor\": 5.00,\r\n                \"descricao\": \"Batata frita\",\r\n                \"imagens\": [\r\n                    {\r\n                        \"path\": \"imagem 1\"\r\n                    }\r\n                ]\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/pedidos/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pedidos",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checkout pedido - Cliente informado",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataPedido\": \"27/01/2024\",\r\n    \"statusPedido\": 1,\r\n    \"cliente\": {\r\n        \"nome\": \"Teste\",\r\n        \"email\": \"email@email.com\",\r\n        \"cpf\": \"361.700.630-25\",\r\n        \"senha\": \"senha123\",\r\n        \"status\": true\r\n    },\r\n    \"produtos\": [\r\n        {\r\n            \"produto\": {\r\n                \"id\": 1,\r\n                \"nome\": \"Batata\",\r\n                \"categoria\": \"ACOMPANHAMENTO\",\r\n                \"valor\": 5.00,\r\n                \"descricao\": \"Batata frita\",\r\n                \"imagens\": [\r\n                    {\r\n                        \"path\": \"imagem 1\"\r\n                    }\r\n                ]\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/pedidos/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pedidos",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar pedidos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataPedido\": \"31/10/2023\",\r\n    \"statusPedido\": 1,\r\n    \"cliente\": {\r\n        \"nome\": \"Nome do cliente\",\r\n        \"email\": \"email@email.com\",\r\n        \"cpf\": \"361.700.630-25\",\r\n        \"senha\": \"senha123\",\r\n        \"status\": true\r\n    },\r\n    \"produtos\": [\r\n        {\r\n            \"produto\": {\r\n                \"id\": 4,\r\n                \"nome\": \"Batata\",\r\n                \"categoria\": \"ACOMPANHAMENTO\",\r\n                \"valor\": 5.00,\r\n                \"descricao\": \"Batata frita\",\r\n                \"imagens\": [\r\n                    {\r\n                        \"path\": \"imagem 1\"\r\n                    }\r\n                ]\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar pedidos por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataPedido\": \"31/10/2023\",\r\n    \"statusPedido\": 1,\r\n    \"cliente\": {\r\n        \"nome\": \"Nome do cliente\",\r\n        \"email\": \"email@email.com\",\r\n        \"cpf\": \"361.700.630-25\",\r\n        \"senha\": \"senha123\",\r\n        \"status\": true\r\n    },\r\n    \"produtos\": [\r\n        {\r\n            \"produto\": {\r\n                \"id\": 4,\r\n                \"nome\": \"Batata\",\r\n                \"categoria\": \"ACOMPANHAMENTO\",\r\n                \"valor\": 5.00,\r\n                \"descricao\": \"Batata frita\",\r\n                \"imagens\": [\r\n                    {\r\n                        \"path\": \"imagem 1\"\r\n                    }\r\n                ]\r\n            },\r\n            \"quantidade\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/pedidos/:pedidoId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pedidos",
+								":pedidoId"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Atualizar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Nome do cliente\",\r\n\t\"email\": \"email@email.com\",\r\n\t\"cpf\": \"361.700.630-25\",\r\n\t\"senha\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/clientes/:clienteId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Desativar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/clientes/:clienteId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Novo cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Nome do cliente\",\r\n\t\"email\": \"email@email.com\",\r\n\t\"cpf\": \"361.700.630-25\",\r\n\t\"senha\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:31800/v1/clientes",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar cliente por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/clientes/:clienteId",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"clientes",
+								":clienteId"
+							],
+							"variable": [
+								{
+									"key": "clienteId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:31800/v1/clientes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamentos",
+			"item": [
+				{
+					"name": "Buscar Pagamento por Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:31800/v1/pagamento/:idPedido/status",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pagamento",
+								":idPedido",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "idPedido",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Pagamento por QR Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:31800/v1/pagamento/:idPedido/qrCode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "31800",
+							"path": [
+								"v1",
+								"pagamento",
+								":idPedido",
+								"qrCode"
+							],
+							"variable": [
+								{
+									"key": "idPedido",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
