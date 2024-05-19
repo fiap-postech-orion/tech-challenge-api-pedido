@@ -6,7 +6,6 @@ import br.com.postech.software.architecture.techchallenge.pedido.configuration.S
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ClienteConnector;
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ProducaoConnector;
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ProdutoConnector;
-import br.com.postech.software.architecture.techchallenge.dto.*;
 import br.com.postech.software.architecture.techchallenge.pedido.dto.*;
 import br.com.postech.software.architecture.techchallenge.pedido.enums.StatusPedidoEnum;
 import br.com.postech.software.architecture.techchallenge.pedido.exception.BusinessException;
