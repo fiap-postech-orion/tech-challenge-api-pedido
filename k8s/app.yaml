@@ -1,25 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+  name: api-pedido
   labels:
-    app: app
+    app: api-pedido
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app
+      app: api-pedido
   template:
     metadata:
       labels:
-        app: app
+        app: api-pedido
     spec:
       containers:
         - name: app
+#          image: pedido-api:latest
+#          imagePullPolicy: IfNotPresent
           image: 084477714284.dkr.ecr.us-east-1.amazonaws.com/pedido-api-repository
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8083
           env:
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://terraform-2024031923023447980000000d.c36c48ce06uv.us-east-1.rds.amazonaws.com:5432/postgres"
@@ -41,29 +43,29 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app
+  name: api-pedido
   labels:
-    app: app
+    app: api-pedido
 spec:
   type: LoadBalancer
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 8083
+      targetPort: 8083
       protocol: TCP
   selector:
-    app: app
+    app: api-pedido
 ---
 
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: app-hpa
+  name: api-pedido-hpa
   namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: app
+    name: api-pedido
   minReplicas: 1
   maxReplicas: 10
   metrics:
