@@ -22,13 +22,13 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8083
-          env:
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://terraform-2024031923023447980000000d.c36c48ce06uv.us-east-1.rds.amazonaws.com:5432/postgres"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: "postgres"
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: "password"
+#          env:
+#            - name: SPRING_DATASOURCE_URL
+#              value: "jdbc:postgresql://terraform-2024031923023447980000000d.c36c48ce06uv.us-east-1.rds.amazonaws.com:5432/postgres"
+#            - name: SPRING_DATASOURCE_USERNAME
+#              value: "postgres"
+#            - name: SPRING_DATASOURCE_PASSWORD
+#              value: "password"
 
           resources:
             requests:
