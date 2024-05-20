@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.postech.software.architecture</groupId>
 	<artifactId>tech-challenge-pos-tech-pedido</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<name>tech-challenge-pedido</name>
 	<description>Tech Challenge - Pos Tech de Arquitetura de Software</description>
 	<properties>
@@ -109,6 +109,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>techchallenge-pedido</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
