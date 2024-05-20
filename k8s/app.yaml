@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: app
-          image: silvageovane/tech-challenger-pos-tech:v2
-          imagePullPolicy: IfNotPresent
+          image: 084477714284.dkr.ecr.us-east-1.amazonaws.com/pedido-api-repository
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -73,7 +73,3 @@ spec:
         target:
           type: Utilization
           averageUtilization: 80
-
-
-
-
