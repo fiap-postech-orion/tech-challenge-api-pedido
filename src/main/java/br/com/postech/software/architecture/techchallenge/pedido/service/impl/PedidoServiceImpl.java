@@ -46,20 +46,11 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	public List<PedidoDTO> findTodosPedidosAtivos()throws BusinessException {
 
-		List<Pedido> pedidos = getPersistencia().findByStatusPedidoNotIn(
-				Arrays.asList(StatusPedidoEnum.CONCLUIDO, StatusPedidoEnum.CANCELADO),
+		List<Pedido> pedidos = getPersistencia().findByStatusPedidoIdNotIn(
+				Arrays.asList(5,6),
 				Sort.by(Sort.Direction.ASC, "dataPedido")
 		);
-
-		MAPPER.typeMap(Pedido.class, PedidoDTO.class)
-				.addMappings(mapperA -> mapperA
-						.using(new StatusPedidoParaInteiroConverter())
-						.map(Pedido::getStatusPedido, PedidoDTO::setStatusPedido))
-				.addMappings(mapper -> {
-					mapper.map(src -> src.getId(),PedidoDTO::setNumeroPedido);
-				});
-
-		return MAPPER.map(pedidos, new TypeToken<List<PedidoDTO>>() {}.getType());
+		return pedidos.stream().map(pedido -> new PedidoDTO(pedido)).collect(Collectors.toList());
 	}
 
 	public Pedido findById(Integer id) throws BusinessException {
@@ -89,15 +80,6 @@ public class PedidoServiceImpl implements PedidoService {
 	@Override
 	@Transactional
 	public PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception {
-		//Obtem os dados do pedido
-		MAPPER.typeMap(PedidoDTO.class, Pedido.class)
-				.addMappings(mapperA -> mapperA
-						.using(new InteiroParaStatusPedidoConverter())
-						.map(PedidoDTO::getStatusPedido, Pedido::setStatusPedido));
-
-		Pedido pedido = MAPPER.map(pedidoDTO, Pedido.class);
-		pedido.setDataPedido(LocalDateTime.now());
-		pedido.setStatusPedido(StatusPedidoEnum.REALIZADO);
 
 		ValidaClienteResponseDTO validaClienteResponseDTO = clienteConnector.validaCliente(pedidoDTO.getCliente());
 		if(!validaClienteResponseDTO.isValid()) {
@@ -113,16 +95,10 @@ public class PedidoServiceImpl implements PedidoService {
 			throw new Exception(validaProdutoResponseDTO.getErrorMessage());
 		}
 
-		pedido = save(pedido);
+		Pedido pedido = save(new Pedido(pedidoDTO.getCliente().getId(),
+				LocalDateTime.now(),  StatusPedidoEnum.get(pedidoDTO.getStatusPedido())));
 
-		MAPPER.typeMap(Pedido.class, PedidoDTO.class)
-				.addMappings(mapperA -> mapperA
-						.using(new StatusPedidoParaInteiroConverter())
-						.map(Pedido::getStatusPedido, PedidoDTO::setStatusPedido))
-				.addMappings(mapper -> {
-					mapper.map(src -> src.getId(),PedidoDTO::setNumeroPedido);
-				});
-
+		pedidoDTO.updateNumeroPedido(pedido.getId());
 		producaoConnector.salvarPedidoBaseLeitura(pedidoDTO);
 		return pedidoDTO;
 	}

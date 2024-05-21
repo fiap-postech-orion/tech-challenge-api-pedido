@@ -1,7 +1,7 @@
 package br.com.postech.software.architecture.techchallenge.pedido.model;
 
-import br.com.postech.software.architecture.techchallenge.pedido.enums.StatusPedidoEnum;
 import br.com.postech.software.architecture.techchallenge.pedido.enums.AssociacaoType;
+import br.com.postech.software.architecture.techchallenge.pedido.enums.StatusPedidoEnum;
 import br.com.postech.software.architecture.techchallenge.pedido.util.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,15 +36,19 @@ public class Pedido implements Serializable {
     @Column(name = "data_pedido", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime dataPedido;
 
-    @Type(value = AssociacaoType.class,
-            parameters = {@Parameter(name = Constantes.ENUM_CLASS_NAME, value = "StatusPedidoEnum")})
     @Column(name = "status_pedido_id")
-    private StatusPedidoEnum statusPedido;
+    private Integer statusPedidoId;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PedidoProduto> produtos = new ArrayList<>();
 
     public void updateStatus(String status) {
-        this.statusPedido = StatusPedidoEnum.valueOf(status);
+        this.statusPedidoId = StatusPedidoEnum.valueOf(status).getValue();
+    }
+
+    public Pedido(Long clienteId, LocalDateTime dataPedido, StatusPedidoEnum status){
+        this.clienteId = clienteId;
+        this.dataPedido = dataPedido;
+        this.statusPedidoId = status.getValue();
     }
 }
