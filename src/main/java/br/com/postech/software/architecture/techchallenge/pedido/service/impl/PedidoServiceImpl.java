@@ -1,8 +1,6 @@
 package br.com.postech.software.architecture.techchallenge.pedido.service.impl;
 
-import br.com.postech.software.architecture.techchallenge.pedido.configuration.InteiroParaStatusPedidoConverter;
 import br.com.postech.software.architecture.techchallenge.pedido.configuration.ModelMapperConfiguration;
-import br.com.postech.software.architecture.techchallenge.pedido.configuration.StatusPedidoParaInteiroConverter;
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ClienteConnector;
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ProducaoConnector;
 import br.com.postech.software.architecture.techchallenge.pedido.connector.ProdutoConnector;
@@ -15,7 +13,6 @@ import br.com.postech.software.architecture.techchallenge.pedido.repository.jpa.
 import br.com.postech.software.architecture.techchallenge.pedido.service.PedidoService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

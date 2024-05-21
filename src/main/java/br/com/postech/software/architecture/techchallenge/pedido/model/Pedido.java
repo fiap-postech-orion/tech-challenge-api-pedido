@@ -1,15 +1,11 @@
 package br.com.postech.software.architecture.techchallenge.pedido.model;
 
-import br.com.postech.software.architecture.techchallenge.pedido.enums.AssociacaoType;
 import br.com.postech.software.architecture.techchallenge.pedido.enums.StatusPedidoEnum;
-import br.com.postech.software.architecture.techchallenge.pedido.util.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.Type;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -2,7 +2,6 @@ package br.com.postech.software.architecture.techchallenge.pedido.connector;
 
 import br.com.postech.software.architecture.techchallenge.pedido.dto.PedidoDTO;
 import br.com.postech.software.architecture.techchallenge.pedido.dto.ProducaoUpdateDTO;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
