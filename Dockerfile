@@ -5,9 +5,7 @@ RUN mvn dependency:go-offline
 COPY src/ /app/src
 RUN mvn clean install -DskipTests
 
-
 FROM openjdk:17-alpine
 EXPOSE 8080
-COPY --from=build /app/target/tech-challenge-pos-tech-0.0.2-SNAPSHOT.jar tech-challenge-pos-tech.jar
-ENV JAVA_APP_ARGS="--spring.config.location=/src/main/resources/application.properties"
-ENTRYPOINT ["java","-jar","tech-challenge-pos-tech.jar", "$JAVA_APP_ARGS"]
+COPY --from=build /app/target/techchallenge-pedido.jar techchallenge-pedido.jar
+ENTRYPOINT ["java","-jar","techchallenge-pedido.jar"]
