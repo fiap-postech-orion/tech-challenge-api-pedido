@@ -1,7 +1,7 @@
 package br.com.postech.software.architecture.techchallenge.pedido.model;
 
-import br.com.postech.software.architecture.techchallenge.pedido.enums.CategoriaEnum;
 import br.com.postech.software.architecture.techchallenge.pedido.enums.AssociacaoType;
+import br.com.postech.software.architecture.techchallenge.pedido.enums.CategoriaEnum;
 import br.com.postech.software.architecture.techchallenge.pedido.util.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -8,14 +8,16 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class PagamentoConnector {
 
-    private static final String MICROSSERVICO_PRODUTO_URI = "https://tech-challenge.pagamento.com";
+    private static final String MICROSSERVICO_PRODUTO_URI = "http://localhost:8082";
 
 	public String generateMercadoPagoQrCode(PedidoDTO pedidoDTO) throws Exception {
 		
 		try {
-            String url = MICROSSERVICO_PRODUTO_URI.concat("/v1/pagamento/qrCode");
+            String url = MICROSSERVICO_PRODUTO_URI.concat("/v1/pagamento/")
+                    .concat(pedidoDTO.getNumeroPedido().toString())
+                    .concat("/qrCode");
 			RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, pedidoDTO, String.class);
+            ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
             return responseEntity.getBody();
 
         } catch (Exception exception) {

@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface PedidoJpaRepository extends JpaRepository<Pedido, Integer> {
 
-	List<Pedido> findByStatusPedidoNotIn(List<StatusPedidoEnum> statusPedidos, Sort sort) throws PersistenceException;
+	List<Pedido> findByStatusPedidoIdNotIn(List<Integer> statusPedidos, Sort sort) throws PersistenceException;
 }
