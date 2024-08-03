@@ -35,6 +35,9 @@ public class Pedido implements Serializable {
     @Column(name = "status_pedido_id")
     private Integer statusPedidoId;
 
+    @Column(name = "qr_code")
+    private String qrCode;
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PedidoProduto> produtos = new ArrayList<>();
 
@@ -42,7 +45,7 @@ public class Pedido implements Serializable {
         this.statusPedidoId = StatusPedidoEnum.valueOf(status).getValue();
     }
 
-    public Pedido(Long clienteId, LocalDateTime dataPedido, StatusPedidoEnum status){
+    public Pedido(Long clienteId, LocalDateTime dataPedido, StatusPedidoEnum status) {
         this.clienteId = clienteId;
         this.dataPedido = dataPedido;
         this.statusPedidoId = status.getValue();

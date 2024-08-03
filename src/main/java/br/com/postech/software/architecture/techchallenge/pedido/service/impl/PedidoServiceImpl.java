@@ -92,11 +92,25 @@ public class PedidoServiceImpl implements PedidoService {
 			throw new Exception(validaProdutoResponseDTO.getErrorMessage());
 		}
 
+		return salvarPedido(pedidoDTO);
+	}
+
+	@Override
+	@Transactional
+	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception {
 		Pedido pedido = save(new Pedido(pedidoDTO.getCliente().getId(),
 				LocalDateTime.now(),  StatusPedidoEnum.get(pedidoDTO.getStatusPedido())));
 
 		pedidoDTO.updateNumeroPedido(pedido.getId());
 		producaoConnector.salvarPedidoBaseLeitura(pedidoDTO);
 		return pedidoDTO;
+	}
+
+	@Override
+	@Transactional
+	public void salvarQrCode(Integer id, String qrCode) {
+		Pedido pedido = findById(id);
+		pedido.setQrCode(qrCode);
+		save(pedido);
 	}
 }

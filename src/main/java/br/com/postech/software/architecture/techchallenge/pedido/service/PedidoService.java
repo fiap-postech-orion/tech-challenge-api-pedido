@@ -8,13 +8,17 @@ import java.util.List;
 
 public interface PedidoService {
 
-	List<PedidoDTO> findTodosPedidosAtivos() throws BusinessException;
+	public List<PedidoDTO> findTodosPedidosAtivos() throws BusinessException;
 
-	Pedido findById(Integer id) throws BusinessException;
+	public Pedido findById(Integer id) throws BusinessException;
 
-	PedidoDTO getDtoById(Integer id) throws BusinessException;
+	public PedidoDTO getDtoById(Integer id) throws BusinessException;
 
-	PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception;
+	public PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception;
 
-	PedidoDTO updateStatus(Integer id, String status) throws Exception;
+	public PedidoDTO updateStatus(Integer id, String status) throws Exception;
+
+	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception;
+
+	public void salvarQrCode(Integer id, String qrCode);
 }

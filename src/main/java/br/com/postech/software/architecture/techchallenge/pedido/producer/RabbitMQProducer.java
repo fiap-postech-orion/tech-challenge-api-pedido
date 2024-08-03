@@ -4,9 +4,11 @@ import br.com.postech.software.architecture.techchallenge.pedido.dto.PedidoDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 @AllArgsConstructor
+@Component
 public class RabbitMQProducer {
 
     private String exchange;
