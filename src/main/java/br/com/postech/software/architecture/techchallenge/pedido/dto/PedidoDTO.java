@@ -13,6 +13,7 @@ public class PedidoDTO {
     private ClienteDTO cliente;
     private String dataPedido;
     private Integer statusPedido;
+    private String qrCode;
     @NotEmpty
     private List<PedidoProdutoDTO> produtos;
 

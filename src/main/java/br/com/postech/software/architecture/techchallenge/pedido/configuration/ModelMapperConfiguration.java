@@ -30,7 +30,7 @@ public class ModelMapperConfiguration implements ContextResolver<ModelMapper> {
 	}
 
 	public static ModelMapper getModelMapper() {
-		ModelMapper modelMapper = new NullableMapper();
+		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		modelMapper.getConfiguration().setAmbiguityIgnored(true);
 		modelMapper.getConfiguration().setFieldMatchingEnabled(true);

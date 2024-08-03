@@ -4,6 +4,7 @@ import br.com.postech.software.architecture.techchallenge.pedido.connector.Pagam
 import br.com.postech.software.architecture.techchallenge.pedido.dto.MercadoPagoPagamentoDTO;
 import br.com.postech.software.architecture.techchallenge.pedido.dto.PedidoDTO;
 import br.com.postech.software.architecture.techchallenge.pedido.dto.PedidoPagamentoDTO;
+import br.com.postech.software.architecture.techchallenge.pedido.producer.RabbitMQProducer;
 import br.com.postech.software.architecture.techchallenge.pedido.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ public class PedidoController {
     private PedidoService pedidoService;
     @Autowired
     private PagamentoConnector pagamentoConnector;
+    @Autowired
+    private RabbitMQProducer rabbitMQProducer;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<List<PedidoDTO>> listarTodosPedidosAtivos() throws Exception {
@@ -37,6 +40,13 @@ public class PedidoController {
         PedidoDTO savedPedidoDTO = pedidoService.fazerPedidoFake(pedidoDTO);
         String qrCode = pagamentoConnector.generateMercadoPagoQrCode(savedPedidoDTO);
         return new ResponseEntity<>(new PedidoPagamentoDTO(qrCode, savedPedidoDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/checkout/v2", produces = MediaType.APPLICATION_JSON)
+    public ResponseEntity<HttpStatus> fazerPedido(@RequestBody PedidoDTO pedidoDTO) throws Exception {
+
+        rabbitMQProducer.sendToValidaClienteQueue(pedidoDTO);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     /* TODO
