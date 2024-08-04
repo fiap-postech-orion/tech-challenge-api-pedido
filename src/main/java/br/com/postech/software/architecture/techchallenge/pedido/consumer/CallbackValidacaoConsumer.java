@@ -17,7 +17,7 @@ public class CallbackValidacaoConsumer {
     private PedidoService pedidoService;
     @Autowired
     private PagamentoConnector pagamentoConnector;
-    @RabbitListener (queues = {"${callback.validacao.queue}"})
+    @RabbitListener (queues = {"callbackValidacao"})
     public void consume(PedidoDTO pedidoDTO) throws Exception {
         pedidoDTO = pedidoService.salvarPedido(pedidoDTO);
         String qrCode = pagamentoConnector.generateMercadoPagoQrCode(pedidoDTO);

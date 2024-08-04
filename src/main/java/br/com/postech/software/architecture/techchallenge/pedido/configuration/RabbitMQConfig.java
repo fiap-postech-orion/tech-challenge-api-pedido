@@ -20,41 +20,6 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 @Configuration
 public class RabbitMQConfig {
 
-//	@Bean
-//	public Queue queue(){
-//		return new Queue("testQueue");
-//	}
-//
-//	@Bean
-//	public TopicExchange exchange(){
-//		return new TopicExchange("testExchange");
-//	}
-//
-//	@Bean
-//	public Binding binding(){
-//		return BindingBuilder
-//				.bind(queue())
-//				.to(exchange())
-//				.with("testRoutingKey");
-//	}
-
-	@Bean
-	public ConnectionFactory getRabbitConnectionFactory(){
-		CachingConnectionFactory factory = new CachingConnectionFactory("host", 1);//host e port
-		factory.setVirtualHost("/");
-		factory.setUsername("");
-		factory.setPassword("");
-		factory.setRequestedHeartBeat(10);
-		return factory;
-	}
-
-	public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(){
-		SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
-		factory.setConnectionFactory(this.getRabbitConnectionFactory());
-		factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
-		return factory;
-	}
-
 	@Bean
 	public AmqpTemplate amqpTemplate(ConnectionFactory connectionFactory) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);

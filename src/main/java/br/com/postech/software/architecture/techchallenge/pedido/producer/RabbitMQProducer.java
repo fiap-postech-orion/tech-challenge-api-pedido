@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitMQProducer {
 
-    private String exchange;
+    private static final String exchange = "api";
 
     private static final String validaClienteRoutingKey = "validaCliente";
 
@@ -19,6 +19,6 @@ public class RabbitMQProducer {
 
     public void sendToValidaClienteQueue(PedidoDTO pedido) {
         log.info("Message send: [{}]", pedido.toString());
-        template.convertAndSend(exchange, validaClienteRoutingKey, pedido);
+        template.convertAndSend(validaClienteRoutingKey, pedido);
     }
 }
