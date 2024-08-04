@@ -19,6 +19,6 @@ public class RabbitMQProducer {
 
     public void sendToValidaClienteQueue(PedidoDTO pedido) {
         log.info("Message send: [{}]", pedido.toString());
-        template.convertAndSend(validaClienteRoutingKey, pedido);
+        template.convertAndSend(exchange, validaClienteRoutingKey, pedido);
     }
 }

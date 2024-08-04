@@ -131,9 +131,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-spring-rabbitmq-starter</artifactId>
-			<version>4.1.0</version>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
 		</dependency>
 
 	</dependencies>
