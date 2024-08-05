@@ -1,7 +1,6 @@
 package br.com.postech.software.architecture.techchallenge.pedido.configuration;
 
 import com.rabbitmq.client.AMQP;
-import org.apache.camel.language.simple.Simple;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
