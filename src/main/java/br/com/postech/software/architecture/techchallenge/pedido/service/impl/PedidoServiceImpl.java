@@ -97,6 +97,14 @@ public class PedidoServiceImpl implements PedidoService {
 
 	@Override
 	@Transactional
+	public PedidoDTO salvarPedidoPreValidacao(PedidoDTO pedidoDTO) throws Exception {
+		Pedido pedido = save(new Pedido(LocalDateTime.now(),  StatusPedidoEnum.PENDENTE));
+		pedidoDTO.updateNumeroPedido(pedido.getId());
+		return pedidoDTO;
+	}
+
+	@Override
+	@Transactional
 	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception {
 		Pedido pedido = save(new Pedido(pedidoDTO.getCliente().getId(),
 				LocalDateTime.now(),  StatusPedidoEnum.get(pedidoDTO.getStatusPedido())));

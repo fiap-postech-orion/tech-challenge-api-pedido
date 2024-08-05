@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ErroResponseDTO {
 
+    private Integer pedidoId;
     private boolean isValid;
     private String errorMessage;
 }

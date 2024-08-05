@@ -45,6 +45,7 @@ public class PedidoController {
     @PostMapping(path = "/checkout/v2", produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<HttpStatus> fazerPedido(@RequestBody PedidoDTO pedidoDTO) throws Exception {
 
+        pedidoDTO = pedidoService.salvarPedidoPreValidacao(pedidoDTO);
         rabbitMQProducer.sendToValidaClienteQueue(pedidoDTO);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

@@ -20,5 +20,7 @@ public interface PedidoService {
 
 	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception;
 
+	public PedidoDTO salvarPedidoPreValidacao(PedidoDTO pedidoDTO) throws Exception;
+
 	public void salvarQrCode(Integer id, String qrCode);
 }

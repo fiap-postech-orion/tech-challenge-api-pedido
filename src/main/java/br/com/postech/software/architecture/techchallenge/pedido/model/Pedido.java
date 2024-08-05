@@ -50,4 +50,9 @@ public class Pedido implements Serializable {
         this.dataPedido = dataPedido;
         this.statusPedidoId = status.getValue();
     }
+
+    public Pedido(LocalDateTime dataPedido, StatusPedidoEnum status) {
+        this.dataPedido = dataPedido;
+        this.statusPedidoId = status.getValue();
+    }
 }
