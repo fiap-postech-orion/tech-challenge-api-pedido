@@ -75,6 +75,16 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
+	public PedidoDTO updateStatusEDescricao(Integer id, String status, String descricaoErro) throws Exception {
+		Pedido pedido = findById(id);
+		pedido.updateStatusEDescricao(status, descricaoErro);
+
+		PedidoDTO pedidoDTO = MAPPER.map(save(pedido), PedidoDTO.class);
+		producaoConnector.salvarPedidoBaseLeitura(pedidoDTO);
+		return pedidoDTO;
+	}
+
+	@Override
 	@Transactional
 	public PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception {
 
@@ -92,11 +102,33 @@ public class PedidoServiceImpl implements PedidoService {
 			throw new Exception(validaProdutoResponseDTO.getErrorMessage());
 		}
 
+		return salvarPedido(pedidoDTO);
+	}
+
+	@Override
+	@Transactional
+	public PedidoDTO salvarPedidoPreValidacao(PedidoDTO pedidoDTO) throws Exception {
+		Pedido pedido = save(new Pedido(LocalDateTime.now(),  StatusPedidoEnum.PENDENTE));
+		pedidoDTO.updateNumeroPedido(pedido.getId());
+		return pedidoDTO;
+	}
+
+	@Override
+	@Transactional
+	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception {
 		Pedido pedido = save(new Pedido(pedidoDTO.getCliente().getId(),
 				LocalDateTime.now(),  StatusPedidoEnum.get(pedidoDTO.getStatusPedido())));
 
 		pedidoDTO.updateNumeroPedido(pedido.getId());
 		producaoConnector.salvarPedidoBaseLeitura(pedidoDTO);
 		return pedidoDTO;
+	}
+
+	@Override
+	@Transactional
+	public void salvarQrCode(Integer id, String qrCode) {
+		Pedido pedido = findById(id);
+		pedido.setQrCode(qrCode);
+		save(pedido);
 	}
 }
