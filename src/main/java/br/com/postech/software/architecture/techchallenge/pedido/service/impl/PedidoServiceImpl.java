@@ -75,6 +75,16 @@ public class PedidoServiceImpl implements PedidoService {
 	}
 
 	@Override
+	public PedidoDTO updateStatusEDescricao(Integer id, String status, String descricaoErro) throws Exception {
+		Pedido pedido = findById(id);
+		pedido.updateStatusEDescricao(status, descricaoErro);
+
+		PedidoDTO pedidoDTO = MAPPER.map(save(pedido), PedidoDTO.class);
+		producaoConnector.salvarPedidoBaseLeitura(pedidoDTO);
+		return pedidoDTO;
+	}
+
+	@Override
 	@Transactional
 	public PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception {
 

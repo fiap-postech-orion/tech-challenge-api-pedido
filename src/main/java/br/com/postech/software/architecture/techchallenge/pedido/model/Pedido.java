@@ -38,11 +38,19 @@ public class Pedido implements Serializable {
     @Column(name = "qr_code")
     private String qrCode;
 
+    @Column(name = "ds_erro")
+    private String descricaoErro;
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PedidoProduto> produtos = new ArrayList<>();
 
     public void updateStatus(String status) {
-        this.statusPedidoId = StatusPedidoEnum.valueOf(status).getValue();
+        this.statusPedidoId = StatusPedidoEnum.getByDescricao(status).getValue();
+    }
+
+    public void updateStatusEDescricao(String status, String descricaoErro) {
+        this.statusPedidoId = StatusPedidoEnum.getByDescricao(status).getValue();
+        this.descricaoErro = descricaoErro;
     }
 
     public Pedido(Long clienteId, LocalDateTime dataPedido, StatusPedidoEnum status) {

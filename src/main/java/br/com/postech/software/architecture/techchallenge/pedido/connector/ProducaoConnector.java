@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class ProducaoConnector {
 
-    private static final String MICROSSERVICO_PRODUCAO_URI = "http://localhost:8084";
+    private static final String MICROSSERVICO_PRODUCAO_URI = "http://localhost:8085";
     private static final String REGISTRA_PRODUCAO_ENDPOINT = "/v1/producao";
 
 	public void salvarPedidoBaseLeitura(PedidoDTO pedidoDTO) throws Exception {

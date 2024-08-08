@@ -16,6 +16,8 @@ public interface PedidoService {
 
 	public PedidoDTO fazerPedidoFake(PedidoDTO pedidoDTO) throws Exception;
 
+	public PedidoDTO updateStatusEDescricao(Integer id, String status, String descricaoErro) throws Exception;
+
 	public PedidoDTO updateStatus(Integer id, String status) throws Exception;
 
 	public PedidoDTO salvarPedido(PedidoDTO pedidoDTO) throws Exception;

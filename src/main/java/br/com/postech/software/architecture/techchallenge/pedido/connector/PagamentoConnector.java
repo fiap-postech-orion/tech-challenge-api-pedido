@@ -13,12 +13,13 @@ public class PagamentoConnector {
 	public String generateMercadoPagoQrCode(PedidoDTO pedidoDTO) throws Exception {
 		
 		try {
-            String url = MICROSSERVICO_PRODUTO_URI.concat("/v1/pagamento/")
-                    .concat(pedidoDTO.getNumeroPedido().toString())
-                    .concat("/qrCode");
-			RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
-            return responseEntity.getBody();
+            return "qrCode";
+//            String url = MICROSSERVICO_PRODUTO_URI.concat("/v1/pagamento/")
+//                    .concat(pedidoDTO.getNumeroPedido().toString())
+//                    .concat("/qrCode");
+//			RestTemplate restTemplate = new RestTemplate();
+//            ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
+//            return responseEntity.getBody();
 
         } catch (Exception exception) {
             throw new Exception("Erro ao gerar QR Code: " + exception.getMessage());
